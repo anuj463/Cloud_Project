@@ -8,10 +8,12 @@ app = Flask(__name__)
 app.secret_key = "supersecretkey"
 
 # ---------------- AWS CONFIG ----------------
-AWS_ACCESS_KEY = "YOUR_ACCESS_KEY"
-AWS_SECRET_KEY = "YOUR_SECRET_KEY"
-BUCKET_NAME = "your-bucket-name"
-REGION = "ap-south-1"
+import os
+
+AWS_ACCESS_KEY = os.environ.get("AWS_ACCESS_KEY")
+AWS_SECRET_KEY = os.environ.get("AWS_SECRET_KEY")
+BUCKET_NAME = os.environ.get("BUCKET_NAME")
+REGION = os.environ.get("REGION")
 
 s3 = boto3.client(
     "s3",
