@@ -4,7 +4,12 @@ import os
 
 app = Flask(__name__)
 
-DB_PATH = "/tmp/database.db"
+import os
+
+if os.name == "nt":   # Windows
+    DB_PATH = "database.db"
+else:                # Railway / Linux
+    DB_PATH = "/tmp/database.db"
 
 def init_db():
     conn = sqlite3.connect(DB_PATH)
