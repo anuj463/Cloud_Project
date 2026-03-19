@@ -4,8 +4,7 @@ import os
 
 app = Flask(__name__)
 
-import os
-
+# OS-based DB path
 if os.name == "nt":   # Windows
     DB_PATH = "database.db"
 else:                # Railway / Linux
@@ -22,6 +21,11 @@ def init_db():
     ''')
     conn.commit()
     conn.close()
+
+# ✅ IMPORTANT FIX (RUN DB INIT ALWAYS)
+@app.before_request
+def setup():
+    init_db()
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -48,6 +52,7 @@ def delete(id):
     conn.close()
     return redirect("/")
 
+# Only for local run
 if __name__ == "__main__":
     init_db()
     port = int(os.environ.get("PORT", 5000))
