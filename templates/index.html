@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notes App</title>
+</head>
+<body>
+
+<h2>Add Note</h2>
+
+<form method="POST">
+    <input type="text" name="note" required>
+    <button type="submit">Add</button>
+</form>
+
+<h2>Your Notes</h2>
+
+<ul>
+    {% for note in notes %}
+        <li>
+            {{ note[1] }}
+            <a href="/delete/{{ note[0] }}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
