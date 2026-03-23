@@ -8,8 +8,7 @@ app = Flask(__name__)
 if os.name == "nt":   # Windows
     DB_PATH = "database.db"
 else:                # Railway / Linux
-    DB_PATH = "/tmp/database.db"
-
+    DB_PATH = os.path.join(os.path.dirname(__file__), "database.db")
 def init_db():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
