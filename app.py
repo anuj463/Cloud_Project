@@ -65,3 +65,21 @@ def view():
     data = cursor.fetchall()
     conn.close()
     return str(data)
+import os
+
+DB_PATH = os.path.join(os.path.dirname(__file__), "database.db")
+
+def init_db():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS notes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            content TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+# 👇 ADD THIS LINE (IMPORTANT)
+init_db()
