@@ -2,26 +2,108 @@
 <html>
 <head>
     <title>Notes App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: #667eea;
+            color: white;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f7f7f7;
+            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            background: #e53e3e;
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+
+        .delete-btn:hover {
+            background: #c53030;
+        }
+
+        .note-text {
+            flex: 1;
+        }
+    </style>
 </head>
+
 <body>
 
-<h2>Add Note</h2>
+<div class="container">
+    <h1>📝 My Notes App</h1>
 
-<form method="POST">
-    <input type="text" name="note" required>
-    <button type="submit">Add</button>
-</form>
+    <form method="POST">
+        <input type="text" name="note" placeholder="Write a note..." required>
+        <button type="submit">Add</button>
+    </form>
 
-<h2>Your Notes</h2>
-
-<ul>
-    {% for note in notes %}
+    <ul>
+        {% for note in notes %}
         <li>
-            {{ note[1] }}
-            <a href="/delete/{{ note[0] }}">Delete</a>
+            <span class="note-text">{{ note[1] }}</span>
+            <a href="/delete/{{ note[0] }}">
+                <button class="delete-btn">Delete</button>
+            </a>
         </li>
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ul>
+
+</div>
 
 </body>
 </html>
